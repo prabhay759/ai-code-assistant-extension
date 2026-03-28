@@ -1,0 +1,39 @@
+# ============================================================
+#  AI Code Assistant — .gitignore
+#  NEVER commit API keys or credentials
+# ============================================================
+
+# Environment / secrets files
+.env
+.env.*
+*.env
+secrets.*
+config.local.*
+
+# Any file that might contain API keys
+api-keys.*
+keys.*
+credentials.*
+private.*
+
+# Chrome extension build artifacts
+*.zip
+*.crx
+*.pem          # Extension private key — NEVER commit this!
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if you add a build step later)
+node_modules/
+npm-debug.log*
+dist/
+build/
