@@ -1,0 +1,444 @@
+/* ============================================================
+   AI Code Assistant — Injected UI Styles
+   Uses a dedicated prefix (aia-) to avoid clashing with
+   GitHub / GitLab styles.
+   ============================================================ */
+
+/* ---- Reset for our own elements only ----------------------- */
+#aia-toolbar *,
+#aia-overlay * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================================
+   FLOATING TOOLBAR
+   ============================================================ */
+#aia-toolbar {
+  position: absolute;
+  z-index: 999999;
+  display: none;  /* shown via JS */
+  align-items: center;
+  gap: 2px;
+  background: #1a1b26;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 6px 8px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: aia-pop-in 0.15s ease-out;
+  pointer-events: all;
+  user-select: none;
+}
+
+@keyframes aia-pop-in {
+  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.aia-brand {
+  font-size: 11px;
+  font-weight: 700;
+  color: #7c85f3;
+  letter-spacing: 0.5px;
+  padding: 0 6px 0 2px;
+  white-space: nowrap;
+}
+
+.aia-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.aia-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #c9d1d9;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.1s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.aia-btn:hover {
+  background: rgba(124, 133, 243, 0.18);
+  color: #a5b4fc;
+  transform: translateY(-1px);
+}
+
+.aia-btn:active {
+  transform: translateY(0);
+  background: rgba(124, 133, 243, 0.28);
+}
+
+.aia-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.aia-label {
+  font-size: 12px;
+}
+
+/* ============================================================
+   MODAL OVERLAY
+   ============================================================ */
+#aia-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  display: none;   /* shown via JS */
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: aia-fade-in 0.15s ease-out;
+}
+
+@keyframes aia-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   MODAL PANEL
+   ============================================================ */
+#aia-modal {
+  width: min(720px, 92vw);
+  max-height: 80vh;
+  background: #161b22;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  animation: aia-slide-up 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+@keyframes aia-slide-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---- Modal Header ------------------------------------------ */
+.aia-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+.aia-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.aia-modal-icon {
+  font-size: 16px;
+}
+
+.aia-modal-label {
+  font-size: 14px;
+}
+
+.aia-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aia-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #8b949e;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.aia-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6edf3;
+}
+
+.aia-icon-btn.aia-copied {
+  color: #3fb950;
+}
+
+/* ---- Modal Body -------------------------------------------- */
+.aia-modal-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ---- Selection Preview ------------------------------------ */
+.aia-selection-preview {
+  padding: 10px 16px;
+  font-size: 12px;
+  color: #8b949e;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  white-space: pre-wrap;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+
+/* ---- Response Area --------------------------------------- */
+.aia-response {
+  padding: 18px 20px;
+  overflow-y: auto;
+  flex: 1;
+  color: #c9d1d9;
+  font-size: 14px;
+  line-height: 1.7;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.aia-response::-webkit-scrollbar { width: 6px; }
+.aia-response::-webkit-scrollbar-track { background: transparent; }
+.aia-response::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+
+/* Response typography */
+.aia-response p { margin-bottom: 12px; }
+.aia-response p:last-child { margin-bottom: 0; }
+.aia-response h2 { font-size: 17px; font-weight: 700; color: #e6edf3; margin: 16px 0 8px; }
+.aia-response h3 { font-size: 15px; font-weight: 600; color: #e6edf3; margin: 14px 0 6px; }
+.aia-response h4 { font-size: 13px; font-weight: 600; color: #a5b4fc; margin: 12px 0 4px; }
+.aia-response strong { color: #e6edf3; font-weight: 600; }
+.aia-response ul { padding-left: 20px; margin-bottom: 12px; }
+.aia-response li { margin-bottom: 6px; list-style-type: disc; }
+
+/* Inline code */
+.aia-inline-code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 12.5px;
+  padding: 2px 6px;
+  background: rgba(124, 133, 243, 0.15);
+  border: 1px solid rgba(124, 133, 243, 0.2);
+  border-radius: 4px;
+  color: #a5b4fc;
+}
+
+/* Code blocks */
+.aia-code-block {
+  position: relative;
+  margin: 14px 0;
+  border-radius: 8px;
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.aia-code-block pre {
+  overflow-x: auto;
+  padding: 14px 16px;
+  margin: 0;
+}
+
+.aia-code-block code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 12.5px;
+  color: #c9d1d9;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.aia-code-lang {
+  display: block;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.aia-copy-code {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 7px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: #8b949e;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.aia-copy-code:hover { background: rgba(255, 255, 255, 0.14); color: #e6edf3; }
+
+/* ---- Loading state --------------------------------------- */
+.aia-response.aia-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 140px;
+  color: #8b949e;
+  font-size: 14px;
+}
+
+.aia-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(124, 133, 243, 0.2);
+  border-top-color: #7c85f3;
+  border-radius: 50%;
+  animation: aia-spin 0.75s linear infinite;
+}
+
+@keyframes aia-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Error state ----------------------------------------- */
+.aia-response.aia-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 140px;
+  text-align: center;
+}
+
+.aia-error-icon { font-size: 32px; }
+
+.aia-error-msg {
+  color: #f85149;
+  font-weight: 500;
+  max-width: 440px;
+}
+
+.aia-error-hint {
+  color: #8b949e;
+  font-size: 12.5px;
+  max-width: 440px;
+}
+
+/* ---- Custom prompt form ---------------------------------- */
+.aia-custom-prompt-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.aia-custom-label {
+  font-size: 13px;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.aia-custom-input {
+  width: 100%;
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: #c9d1d9;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.12s;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.aia-custom-input:focus {
+  outline: none;
+  border-color: #7c85f3;
+  box-shadow: 0 0 0 3px rgba(124, 133, 243, 0.15);
+}
+
+.aia-custom-input::placeholder {
+  color: rgba(139, 148, 158, 0.5);
+}
+
+.aia-custom-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.aia-submit-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #7c85f3;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.1s;
+}
+
+.aia-submit-btn:hover {
+  background: #6875e8;
+  transform: translateY(-1px);
+}
+
+.aia-submit-btn:active {
+  transform: translateY(0);
+}
+
+.aia-cancel-btn {
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  background: transparent;
+  color: #8b949e;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.aia-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #c9d1d9;
+}
